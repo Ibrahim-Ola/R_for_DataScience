@@ -139,3 +139,113 @@ sub_set
 These examples demonstrate various applications of logical indexing for subsetting vectors in R. You can combine logical conditions, use the `which()` function to obtain indices, work with logical vectors, and use negation to create subsets based on specific criteria or conditions.
 
 
+* grep: In R, the `grep(`) function is used to search for patterns within character vectors or strings. It stands for "generalized regular expression pattern" and provides a way to find matches based on specific patterns or regular expressions. The syntax is:
+
+```
+grep(pattern, x, ...)
+```
+
+```{r}
+name_strings <- c('John', 'Jane', 'AliceJ', 'Bob')
+
+matches<- grep(pattern = 'J', x=name_strings)
+matches
+```
+
+
+```{r}
+
+# names containing J
+sub_set<-name_strings[grep("J", name_strings)]
+sub_set
+
+# names starting with J
+sub_set<-name_strings[grep("^J", name_strings)]
+sub_set
+```
+
+* %1n%: The `%in%` operator in R is used to check if elements from one vector or set are present in another vector or set. It helps you determine whether there is any overlap or commonality between two sets of values. Things to note:
+
+1. When you use the `%in%` operator, it checks whether each element from Set A is present in Set B. For example:
+
+```
+setA %in% setB
+```
+
+2. The operator returns a logical vector of the same length as Set A. Each element of the resulting vector is either TRUE or FALSE. If an element from Set A is found in Set B, the corresponding element in the resulting vector will be TRUE, indicating a match. Otherwise, it will be FALSE, indicating no match.
+
+```{r}
+setA <- 1:5
+setB <- seq(3,9,2) # 3, 5, 7, 9
+
+matches <- setA %in% setB
+matches
+```
+
+
+
+## Subsetting a Matrix in R
+
+A matrix is a two dimensional vector. It means that a matrix has rows and columns.
+
+```{r}
+matrix_eg <- matrix(data=1:25, nrow = 5, ncol = 5, byrow = T)
+matrix_eg
+```
+
+* Subsetting a single element: To get a single element, specify its row and column.
+
+```{r}
+row_index<-2
+column_index<-3
+
+matrix_eg[row_index, column_index]
+```
+
+* Subsetting an entire row or column: You can subset a whole row or column by leaving the other index blank.
+
+```{r}
+matrix_eg[3,]
+
+matrix_eg[,2]
+```
+
+* Subsetting Using Logical Vectors: Another way to subset is to use a logical vector.
+
+```{r}
+# rows where the first column's value is greater than 2
+matrix_eg[matrix_eg[, 1] > 2,]
+```
+
+* Subset using a matrix: You can also subset using a matrix, where each row of the matrix is a (row, column) pair. 
+
+
+```{r}
+indices<- matrix(c(2,3,4,3), nrow = 2)
+indices
+```
+
+```{r}
+matrix_eg[indices]
+```
+
+```{r}
+matrix_eg[matrix(c(2,3,4,3), nrow = 2)]
+```
+
+
+
+```{r}
+matrix_eg[2,4]
+matrix_eg[3,3]
+```
+
+* Subset using a range of indices
+* Subset using negative indices
+* Subset using a combination of techniques
+* Using the `drop` argument
+* Subset using the `which()` function
+* Using functions for row or column subsetting
+* Subsetting with a boolean matrix
+
+
